@@ -120,7 +120,7 @@ hisco_in.data_frame <- function(x, name = NULL, status = NULL, relation = NULL, 
 }
 
 hisco_in.character <- function(x, ...){
-  # read data from xls and use data.frame
+  # read data from csv and use data.frame
   assert_that(file.exists(x), msg = sprintf("Cannot open file '%s'", x))
   raw <- read.csv(x)
   colnames(raw) <- tolower(colnames(raw))

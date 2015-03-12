@@ -17,7 +17,8 @@
 Leeuwen, M.H.D.V. & Maas, I. (2011). \emph{HISCLASS: a
   historical international social class scheme. Leuven:
   Leuven University Press};  Mandemakers etal. (2013)
-  \emph{HSN standardized, HISCO-coded and classified occupational titles, release 2013.01}.
+  \emph{HSN standardized, HISCO-coded and classified occupational
+  titles, release 2013.01}.
 }
 \usage{
 data(hisclass)

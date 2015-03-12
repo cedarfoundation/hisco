@@ -20,10 +20,16 @@
   \item{socpo_label}{SOCPO label}
 }}
 \source{
-The dataset is based on the Mandemakers etal. (2013)
-  \emph{HSN standardized, HISCO-coded and classified occupational titles, release 2013.01}
-  downloaded from \url{http://www.iisg.nl/hsn/data/occupations.html} \emph{Accessed, 2014-09-02}.
-  Pre-processed by Glenn Sandström, Umeå university.
+The dataset is based on the Kees Mandemakers, Sanne Muurling,
+  Ineke Maas, Bart Van de Putte, Richard L. Zijdeman, Paul Lambert,
+  Marco H.D. van Leeuwen, Frans van Poppel and Andrew Miles,
+  \emph{HSN standardized, HISCO-coded and classified occupational titles,
+  release 2013.01} (IISG Amsterdam 2013); Marco H. D. van Leeuwen,
+  Ineke Maas and Andrew Miles, \emph{HISCO. Historical International
+  Standard Classification of Occupations} (Leuven University Press 2002)
+  downloaded from \url{http://www.iisg.nl/hsn/data/occupations.html}
+  \emph{Accessed, 2014-09-02}; Pre-processed by Glenn Sandström,
+  Umeå university.
 }
 \usage{
 data(hisco)
