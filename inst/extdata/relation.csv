@@ -1,0 +1,12 @@
+variable,value,description,type
+relation,11,Wife or widow,Family relationship
+relation,12,Son,Family relationship
+relation,13,Daughter,Family relationship
+relation,14,Other male relative,Family relationship
+relation,15,Other female relative,Family relationship
+relation,21,Former or retired,Temporal relationship
+relation,22,Future,Temporal relationship
+relation,31,"Voluntary, honorary",Voluntary or honorary relationship
+relation,41,Physical or mental disability,Incapacitated
+relation,51,Homeworker (household worker),Housework
+relation,-9,Empty value,No relationship

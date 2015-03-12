@@ -1,7 +1,7 @@
 HISCO classification
 ====================
 
-A package for classifing HISCO codes (Historical International Standard Classification of Occupations) to HISCLASS, HISCLASS 5, SOCPO and Universal HISCAM historical socla class systems.
+A package for classifing HISCO codes (Historical International Standard Classification of Occupations) to HISCLASS, HISCLASS 5, SOCPO and Universal HISCAM historical social class systems.
 
 For further references see [HSN standardized, HISCO-coded and classified occupational titles, release 2013.01](http://www.iisg.nl/hsn/data/occupations.html)
 
@@ -11,6 +11,7 @@ Examples
 Getting the default, HISCLASS.
 
 ``` r
+library(hisco)
 hisco_codes <- c(22670, 22675, 22680, 22690, 30000, 31000, 31020, 31030, 31040)
 hisco_to_ses(hisco_codes)
 ```

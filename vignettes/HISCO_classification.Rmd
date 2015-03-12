@@ -16,6 +16,7 @@ For further references see [HSN standardized, HISCO-coded and classified occupat
 Getting the default, HISCLASS.
 
 ```{r}
+library(hisco)
 hisco_codes <- c(22670, 22675, 22680, 22690, 30000, 31000, 31020, 31030, 31040)
 hisco_to_ses(hisco_codes)
 ```

@@ -1,0 +1,65 @@
+---
+title: "Description of variables and social class systems"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Description of variables and social class systems}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r init, echo = FALSE, message = FALSE}
+library(hisco)
+library(knitr)
+library(dplyr)
+```
+
+From [HSN standardized, HISCO-coded and classified occupational titles, release 2013.01](http://www.iisg.nl/hsn/data/occupations.html).
+
+## HISCLASS
+
+```{r}
+data(hisclass)
+kable(hisclass)
+```
+
+## HISCLASS 5
+
+```{r}
+data(hisclass_5)
+kable(hisclass_5)
+```
+
+## SOCPO
+
+```{r}
+data(socpo)
+kable(socpo)
+```
+
+## Variables
+
+This codes are used to further specify classification when the HISCO code is insufficient.
+
+### Status
+
+```{r}
+path <- system.file("extdata", "status.csv", package = "hisco")
+if (file.exists(path)){
+  d <- read.csv(path)
+  kable(d[ ,c(2,4,3)])
+}
+```
+
+### Relation
+
+```{r}
+path <- system.file("extdata", "relation.csv", package = "hisco")
+if (file.exists(path)){
+  d <- read.csv(path)
+  kable(d[ ,c(2,4,3)])
+}
+
+```
+
+
+

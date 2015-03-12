@@ -1,0 +1,17 @@
+variable,value,description,type
+status,11,"Owner, proprietor",Owenership
+status,12,"Lease-holder, share-cropper",Owenership
+status,13,Poor,Owenership
+status,21,Master,Artisan career
+status,22,Journeyman,Artisan career
+status,23,"Apprentice, lerner",Artisan career
+status,24,Artisan,Artisan career
+status,31,Principal,Principal and subordinates
+status,32,Worker,Principal and subordinates
+status,33,Subordinate,Principal and subordinates
+status,34,Serfs and slaves,Principal and subordinates
+status,41,Student,Tertiary education
+status,42,Graduate,Tertiary education
+status,51,Nobility,Pure status
+status,52,Prestige titles,Pure status
+status,-9,Empty values,No status

@@ -7,3 +7,12 @@ test_that("hisclass", {
   expect_equal(x$hisco, hisco_codes)
   expect_equal(x2, x$hisclass)
 })
+
+# test hisclass_5
+# test socpo
+# test hiscam_u1
+# test status
+# test relation
+# test product
+# test csv
+# test dat.frame
