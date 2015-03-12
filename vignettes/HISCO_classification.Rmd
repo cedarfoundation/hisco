@@ -1,12 +1,11 @@
 ---
-title: Hisco
-output:
-  md_document: 
-    variant: markdown_github
+title: "HISCO classification"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{HISCO classification}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
-
-HISCO classification
-==================
 
 A package for classifing HISCO codes (Historical International Standard Classification of Occupations) to HISCLASS, HISCLASS 5, SOCPO and Universal HISCAM historical socla class systems.
 

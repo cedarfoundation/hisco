@@ -1,9 +1,14 @@
-Hisco
-=====
+HISCO classification
+====================
 
-Hisco coding table
+A package for classifing HISCO codes (Historical International Standard Classification of Occupations) to HISCLASS, HISCLASS 5, SOCPO and Universal HISCAM historical socla class systems.
 
-Getting the default hisclass
+For further references see [HSN standardized, HISCO-coded and classified occupational titles, release 2013.01](http://www.iisg.nl/hsn/data/occupations.html)
+
+Examples
+--------
+
+Getting the default, HISCLASS.
 
 ``` r
 hisco_codes <- c(22670, 22675, 22680, 22690, 30000, 31000, 31020, 31030, 31040)
@@ -12,7 +17,7 @@ hisco_to_ses(hisco_codes)
 
     ## [1] 6 6 6 6 5 5 4 2 4
 
-Socpo classification with status codes
+SOCPO classification with status codes.
 
 ``` r
 hisco_to_ses(hisco_codes, "socpo", status = rep(33, length(hisco_codes)))
@@ -20,7 +25,7 @@ hisco_to_ses(hisco_codes, "socpo", status = rep(33, length(hisco_codes)))
 
     ## [1] NA  3  3  3 42 42 42 42 42
 
-Classification to hisclass label
+Classification to label HISCLASS.
 
 ``` r
 hisco_to_ses(hisco_codes, "hisclass", output = "labled")
@@ -37,7 +42,7 @@ hisco_to_ses(hisco_codes, "hisclass", output = "labled")
     ## 8        2                                  Higher professionals
     ## 9        4 Lower professionals, and clerical and sales personnel
 
-With summary messages
+With summary statistics.
 
 ``` r
 hisco_to_ses(hisco_codes, messages = TRUE)
@@ -87,6 +92,6 @@ hisco_to_ses(hisco_codes, messages = TRUE)
     ## 
     ## match     n   prop
     ## ------  ---  -----
-    ## FALSE     9      1
+    ## TRUE      9      1
 
     ## [1] 6 6 6 6 5 5 4 2 4

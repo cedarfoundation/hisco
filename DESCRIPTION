@@ -1,6 +1,6 @@
 Package: hisco
 Title: Hisco codes
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: as.person(c(
     "Johan Junkka <johan.junkka@umu.se> [aut, cre]", 
     "Glenn Sandström <glenn.sandstrom@umu.se> [aut]"

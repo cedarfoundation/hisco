@@ -57,9 +57,8 @@ hisco_to_ses <- function(x,
     message("\n\nSOCPO matches:")
     print(knitr::kable(res %>% count(socpo_label) %>% mutate( prop = round(n/sum(n),2))))
     message("\n\nHISCAM_U1 matches:")
-
     print(knitr::kable(
-      res %>% mutate(match = factor(is.na(hiscam_u1))) %>% count(match) %>% mutate( prop = round(n/sum(n),2))
+      res %>% mutate(match = factor(!is.na(hiscam_u1))) %>% count(match) %>% mutate( prop = round(n/sum(n),2))
       ))
 
   }
