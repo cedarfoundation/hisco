@@ -1,0 +1,92 @@
+Hisco
+=====
+
+Hisco coding table
+
+Getting the default hisclass
+
+``` r
+hisco_codes <- c(22670, 22675, 22680, 22690, 30000, 31000, 31020, 31030, 31040)
+hisco_to_ses(hisco_codes)
+```
+
+    ## [1] 6 6 6 6 5 5 4 2 4
+
+Socpo classification with status codes
+
+``` r
+hisco_to_ses(hisco_codes, "socpo", status = rep(33, length(hisco_codes)))
+```
+
+    ## [1] NA  3  3  3 42 42 42 42 42
+
+Classification to hisclass label
+
+``` r
+hisco_to_ses(hisco_codes, "hisclass", output = "labled")
+```
+
+    ##   hisclass                                        hisclass_label
+    ## 1        6                                               Foreman
+    ## 2        6                                               Foreman
+    ## 3        6                                               Foreman
+    ## 4        6                                               Foreman
+    ## 5        5                    Lower clerical and sales personnel
+    ## 6        5                    Lower clerical and sales personnel
+    ## 7        4 Lower professionals, and clerical and sales personnel
+    ## 8        2                                  Higher professionals
+    ## 9        4 Lower professionals, and clerical and sales personnel
+
+With summary messages
+
+``` r
+hisco_to_ses(hisco_codes, messages = TRUE)
+```
+
+    ## 
+    ## 
+    ## HISCLASS matches:
+
+    ## 
+    ## 
+    ## hisclass_label                                            n   prop
+    ## ------------------------------------------------------  ---  -----
+    ## Foreman                                                   4   0.44
+    ## Higher professionals                                      1   0.11
+    ## Lower clerical and sales personnel                        2   0.22
+    ## Lower professionals, and clerical and sales personnel     2   0.22
+
+    ## 
+    ## 
+    ## HISCLASS 5 matches:
+
+    ## 
+    ## 
+    ## hisclass_5_label       n   prop
+    ## -------------------  ---  -----
+    ##  Elite                 1   0.11
+    ## Lower middle class     8   0.89
+
+    ## 
+    ## 
+    ## SOCPO matches:
+
+    ## 
+    ## 
+    ## socpo_label         n   prop
+    ## ----------------  ---  -----
+    ## Elite               1   0.11
+    ## Middle Class        4   0.44
+    ## Skilled workers     4   0.44
+
+    ## 
+    ## 
+    ## HISCAM_U1 matches:
+
+    ## 
+    ## 
+    ## match     n   prop
+    ## ------  ---  -----
+    ## FALSE     9      1
+
+    ## [1] 6 6 6 6 5 5 4 2 4

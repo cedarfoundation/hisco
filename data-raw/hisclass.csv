@@ -1,0 +1,15 @@
+hisclass,hisclass_label,manual,skill_level,supervision,sector
+1,Higher manager,non-manual,high,yes,mainly other
+2,Higher professionals,non-manual,high,no,other
+3,Lower managers,non-manual,medium,yes,mainly other
+4,"Lower professionals, and clerical and sales personnel",non-manual,medium,no,other
+5,Lower clerical and sales personnel,non-manual,low,no,other
+6,Foreman,manual,medium,yes,other
+7,Medium skilled workers,manual,medium,no,other
+8,Farmers and fishermen,manual,medium,no,primary
+9,Lower skilled worker,manual,low,no,other
+10,Lower skilled farm workers,manual,low,no,primary
+11,Unskilled workers,manual,unskilled,no,other
+12,Unskilled farm workers,manual,unskilled,no,primary
+13,Unskilled workers not specified,manual,unskilled,no,primary
+-9,No HISCLASS code,,,,

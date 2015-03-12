@@ -1,0 +1,7 @@
+hisclass_5, hisclass_relation, hisclass_5_label,hisclass_5_description
+1, "1, and 2", Elite, "(higher managers and higher professionals)"
+2, "3, 4, 5 and 6",Lower middle class, "(lower managers, professionals, clerical and sales personnel and foremen)"
+3, 8, "Self-employed farmers and fishermen",
+4, "7, and 9", "Skilled workers", "(medium skilled and lower skilled)"
+5, "10, 11, 12 and 13", "Unskilled workers and farm workers"
+-1,  -1,  "No code in HISCLASS"

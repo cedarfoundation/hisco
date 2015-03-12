@@ -1,0 +1,12 @@
+relation,relation_description,relation_type
+11,Wife or widow,Family relationship
+12,Son,Family relationship
+13,Daughter,Family relationship
+14,Other male relative,Family relationship
+15,Other female relative,Family relationship
+21,Former or retired,Temporal relationship
+22,Future,Temporal relationship
+31,"Voluntary, honorary",Voluntary or honorary relationship
+41,Physical or mental disability,Incapacitated
+51,Homeworker (household worker),Housework
+-9,Empty value,No relationship
