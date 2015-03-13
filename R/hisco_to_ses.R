@@ -30,8 +30,9 @@ hisco_to_ses <- function(x,
     reference = NULL,
     messages = FALSE) {
   
-  if (!is.null(reference))
-    stop("Reference not implemented yet")
+  if (!is.null(reference)) 
+    reference <- validate_ref(reference)
+
   out_class <- match.arg(class)
   output_format <- match.arg(output)
   if (out_class == "hiscam_u1" & output_format == "labled")
@@ -46,7 +47,8 @@ hisco_to_ses <- function(x,
     "numeric" = hisco_in.numeric(x, status, relation, product)
   )
 
-  filtered <- filter_hisco(dat)
+
+  filtered <- filter_hisco(dat, reference)
   
   res <- left_join(dat, filtered$hisco, by = filtered$join_by) 
   if (messages) {
@@ -78,9 +80,15 @@ hisco_to_ses <- function(x,
   ))
 }
 
-filter_hisco <- function(x) {
+filter_hisco <- function(x, ref) {
   env <- environment()
-  data(hisco, package = "hisco", envir = env)
+
+  if (!is.null(ref)){
+    hisco <- ref
+  } else{
+    data(hisco, package = "hisco", envir = env)
+  }
+  
   join_by <- "hisco"
   if ("status" %in% colnames(x)) {
     join_by <- c(join_by, "status")
