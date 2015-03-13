@@ -130,4 +130,10 @@ You will now have a `.csv` file with the following structure
 | hisclass\_5\_label | fctr | NA, Unskilled workers and farm workers, NA, NA, ...    |
 | socpo\_label       | fctr | NA, Unskilled workers, Middle Class, Elite, Elite, ... |
 
-In this file you can add new status relation, product, hiclass, hisclass\_5, socpo, and hiscam\_u1 using values from their respective social classification scheme. See [HSN standardized, HISCO-coded and classified occupational titles, release 2013.01](http://www.iisg.nl/hsn/data/occupations.html) for further information. However you cannot add any new HISCO codes and each hisco code cannot have more than one unique combination of status, relation and product. Furthermore, to use the updated reference file in the `hisco_to_ses` function the column names must be retained.
+In this file you can manually update HISCO classifications by adding or updating status relation, product, hiclass, hisclass\_5, socpo, and hiscam\_u1 codes using values from their respective social classification scheme. See [HSN standardized, HISCO-coded and classified occupational titles, release 2013.01](http://www.iisg.nl/hsn/data/occupations.html) for further information. However you cannot add any new HISCO codes and each hisco code cannot have more than one unique combination of status, relation and product. Furthermore, to use the updated reference file in the `hisco_to_ses` function the column names must be retained.
+
+Use the updated reference file:
+
+``` r
+hisco_to_ses(hisco_codes, reference = "my_hisco.csv")
+```

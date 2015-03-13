@@ -1,7 +1,7 @@
 Encoding: UTF-8
 Package: hisco
 Title: HISCO classification
-Version: 0.1.4
+Version: 0.2
 Authors@R: as.person(c(
     "Johan Junkka <johan.junkka@umu.se> [aut, cre]", 
     "Glenn Sandström <glenn.sandstrom@umu.se> [aut]"
