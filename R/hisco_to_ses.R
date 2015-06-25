@@ -113,7 +113,7 @@ filter_hisco <- function(x, ref) {
 
 hisco_in.data_frame <- function(x, name = NULL, status = NULL, relation = NULL, product = NULL){
   
-  assert_that(name %in% colnames(x), msg = sprintf("No column named %s", name))
+  assert_that(name %in% colnames(x))
   res <- data.frame(hisco = x[ ,name])
   
   if (!is.null(status))
