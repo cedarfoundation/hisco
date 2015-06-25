@@ -1,2 +1,4 @@
 ^README\.Rmd$
 ^data-raw$
+^docker_test$
+^docker_test.sh$
