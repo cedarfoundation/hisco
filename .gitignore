@@ -1,2 +1,2 @@
 inst/doc
-docker_test/hisco*.tar.gz
+tests/docker_test/hisco*.tar.gz

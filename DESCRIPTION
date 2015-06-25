@@ -14,8 +14,7 @@ Depends: R (>= 3.1.2)
 License: MIT + file LICENSE
 LazyData: true
 Imports: dplyr,
-    assertthat,
-    knitr
+    assertthat
 Suggests: testthat,
     rmarkdown,
     knitr
