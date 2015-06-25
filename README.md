@@ -2,9 +2,17 @@ HISCO classification
 ====================
 
 <!-- This README.md file is built by the R markdown file README.md please edit that file for updates -->
-A package for classifing HISCO codes (Historical International Standard Classification of Occupations) to HISCLASS, HISCLASS 5, SOCPO and Universal HISCAM historical social class systems.
+A package for classifying HISCO codes (Historical International Standard Classification of Occupations) to HISCLASS, HISCLASS 5, SOCPO and Universal HISCAM historical social class systems. The package is developed together with [Glenn Sandström](https://github.com/glennsandstrom).
 
 For further references see [HSN standardized, HISCO-coded and classified occupational titles, release 2013.01](http://www.iisg.nl/hsn/data/occupations.html)
+
+Installation
+------------
+
+``` r
+library(devtools)
+install_github("junkka/hisco")
+```
 
 Examples
 --------
@@ -30,19 +38,19 @@ hisco_to_ses(hisco_codes, "socpo", status = rep(33, length(hisco_codes)))
 Classification to label HISCLASS.
 
 ``` r
-hisco_to_ses(hisco_codes, "hisclass", output = "labled")
+hisco_to_ses(hisco_codes, "hisclass", output = "label")
 ```
 
-    ##   hisclass                                        hisclass_label
-    ## 1        6                                               Foreman
-    ## 2        6                                               Foreman
-    ## 3        6                                               Foreman
-    ## 4        6                                               Foreman
-    ## 5        5                    Lower clerical and sales personnel
-    ## 6        5                    Lower clerical and sales personnel
-    ## 7        4 Lower professionals, and clerical and sales personnel
-    ## 8        2                                  Higher professionals
-    ## 9        4 Lower professionals, and clerical and sales personnel
+    ## [1] Foreman                                              
+    ## [2] Foreman                                              
+    ## [3] Foreman                                              
+    ## [4] Foreman                                              
+    ## [5] Lower clerical and sales personnel                   
+    ## [6] Lower clerical and sales personnel                   
+    ## [7] Lower professionals, and clerical and sales personnel
+    ## [8] Higher professionals                                 
+    ## [9] Lower professionals, and clerical and sales personnel
+    ## 14 Levels: Farmers and fishermen Foreman ... Unskilled workers not specified
 
 With summary statistics.
 
@@ -71,7 +79,7 @@ hisco_to_ses(hisco_codes, messages = TRUE)
     ## 
     ## hisclass_5_label       n   prop
     ## -------------------  ---  -----
-    ##  Elite                 1   0.11
+    ## Elite                  1   0.11
     ## Lower middle class     8   0.89
 
     ## 

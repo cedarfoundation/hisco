@@ -10,9 +10,17 @@ HISCO classification
 
 <!-- This README.md file is built by the R markdown file README.md please edit that file for updates -->
 
-A package for classifing HISCO codes (Historical International Standard Classification of Occupations) to HISCLASS, HISCLASS 5, SOCPO and Universal HISCAM historical social class systems.
+A package for classifying HISCO codes (Historical International Standard Classification of Occupations) to HISCLASS, HISCLASS 5, SOCPO and Universal HISCAM historical social class systems. The package is developed together with [Glenn Sandström](https://github.com/glennsandstrom).
 
 For further references see [HSN standardized, HISCO-coded and classified occupational titles, release 2013.01](http://www.iisg.nl/hsn/data/occupations.html)
+
+## Installation
+
+
+```{r, eval = FALSE}
+library(devtools)
+install_github("junkka/hisco")
+```
 
 ## Examples
 
@@ -33,7 +41,7 @@ hisco_to_ses(hisco_codes, "socpo", status = rep(33, length(hisco_codes)))
 Classification to label HISCLASS.
 
 ```{r}
-hisco_to_ses(hisco_codes, "hisclass", output = "labled")
+hisco_to_ses(hisco_codes, "hisclass", output = "label")
 ```
 
 With summary statistics.
