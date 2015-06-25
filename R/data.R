@@ -6,18 +6,22 @@
 #' @usage data(hisco)
 #' @format A data frame with 4123 rows and 9 variables:
 #' \describe{
+#'   \item{id}{id code}
+#'   \item{original}{Original text}
+#'   \item{standard}{Standardized text}
 #'   \item{hisco}{HISCO basic code}
-#'   \item{en_hisco_text}{Plain text description of occupation}
 #'   \item{status}{HISCO status code}
 #'   \item{relation}{HISCO relation code}
 #'   \item{product}{HISCO  product code}
 #'   \item{hisclass}{HISCLASS code}
 #'   \item{hisclass_5}{HISCLASS code comprised in 5 classes}
-#'   \item{socpo}{SOCPO code}
 #'   \item{hiscam_u1}{Universal HISCAM code}
+#'   \item{hiscam_nl}{HISCAM code}
+#'   \item{socpo}{SOCPO code}
 #'   \item{hisclass_label}{HISCLASS label}
 #'   \item{hisclass_5_label}{HISCLASS 5 label}
 #'   \item{socpo_label}{SOCPO label}
+#'   \item{release}{HISCO release version}
 #' }
 #' @source The dataset is based on the Kees Mandemakers, Sanne Muurling, 
 #'   Ineke Maas, Bart Van de Putte, Richard L. Zijdeman, Paul Lambert, 

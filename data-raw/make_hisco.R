@@ -1,13 +1,25 @@
 library(assertthat)
 library(dplyr)
-hisco <- read.csv("data-raw/hisco-ses.csv.gz")
-colnames(hisco) <- tolower(colnames(hisco))
+
+url <- "http://www.iisg.nl/hsn/data/zip/release_hsn_hisco_2013_01_csv.zip"
+file_name <- "HSN_HISCO_release_2013_01.csv"
+temp_dir <- tempdir()
+temp_file <- tempfile()
+download.file(url, temp_file)
+unzip(temp_file, file_name, exdir = temp_dir)
+
+hisco <- read.csv(file.path(temp_dir, file_name), 
+  header = FALSE, sep = ";", encoding = "latin1", stringsAsFactors = FALSE)
+colnames(hisco) <- c("id", "original", "standard", "hisco", "status", 
+  "relation", "product", "hisclass", "hisclass_5", "hiscam_u1", "hiscam_nl", 
+  "socpo", "release")
+hisco$original <- iconv(hisco$original, "latin1", "utf8")
+hisco$standard <- iconv(hisco$standard, "latin1", "utf8")
 
 res <- hisco %>% filter(is.na(status), is.na(relation), is.na(product)) %>% 
   count(hisco) %>% 
   filter(n > 1)
 
-assert_that(all(unique(res$hisco) %in% unique(hisco$hisco)))
 assert_that(nrow(res) == 0)
 
 hisclass <- read.csv("data-raw/hisclass.csv")
@@ -39,8 +51,9 @@ hisco <- hisco2
 save(hisco, file = "data/hisco.rda")
 
 
-socpo <- read.csv("data-raw/socpo.csv")
+socpo <- read.csv("data-raw/socpo.csv", encoding = "utf8")
 colnames(socpo) <- tolower(colnames(socpo))
+levels(socpo$socpo_description) <- iconv(levels(socpo$socpo_description), "utf8", "utf8")
 
 save(socpo, file = "data/socpo.rda")
 
@@ -51,6 +64,6 @@ assert_that(nrow(hisco) == nrow(hisco2))
 
 hisco <- hisco2
 
-save(hisco, file = "data/hisco.rda")
+save(hisco, file = "data/hisco.rda", compress = "xz")
 
 
