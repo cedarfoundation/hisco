@@ -5,10 +5,12 @@ library(dplyr)
 hisco <- read.csv("data-raw/hisco-ses.csv.gz")
 colnames(hisco) <- tolower(colnames(hisco))
 hisco <- hisco %>% 
-  mutate(en_hisco_text = str_replace_all(en_hisco_text, "â€™", "'"))
+  mutate(
+    en_hisco_text = str_replace_all(en_hisco_text, "â€™", "'")
+  )
 
-res <- hisco %>% filter(is.na(status), is.na(relation), is.na(product)) %>% 
-  count(hisco) %>% 
+res <- hisco_hsn %>% group_by(hisco, status, relation, product) %>% 
+  tally() %>% 
   filter(n > 1)
 
 assert_that(nrow(res) == 0)

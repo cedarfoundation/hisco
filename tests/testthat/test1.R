@@ -28,6 +28,14 @@ test_that("hisclass", {
 # test hisclass_5
 # test socpo
 # test hiscam_u1
+test_that("hiscam_u1", {
+  hisco_codes <- c(51050, 22670, 22675, 22680, 22680, 22690, 30000, 31000, 31020, 31030, 31040, 45220, 45220, 51050)
+  expected <- c(58.02,66.93,78.55,73.41,73.41,57.72,72.87,88.41,90.51,
+    69.38,68.18,51.90,51.90,58.02)
+  x <- hisco_to_ses(hisco_codes, "hiscam_u1")
+  expect_equal(x, expected)
+  expect_error(hisco_to_ses(hisco_codes, "hiscam_u1", label = TRUE))
+})
 # test status
 # test relation
 # test product

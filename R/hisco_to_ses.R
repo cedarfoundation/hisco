@@ -56,7 +56,7 @@ hisco_to_ses <- function(x,
   res[ ,2]
 }
 
-#' Print message
+# Print message
 
 print_message <- function(res){
   
