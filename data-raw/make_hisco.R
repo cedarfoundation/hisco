@@ -1,20 +1,11 @@
 library(assertthat)
+library(stringr)
 library(dplyr)
 
-url <- "http://www.iisg.nl/hsn/data/zip/release_hsn_hisco_2013_01_csv.zip"
-file_name <- "HSN_HISCO_release_2013_01.csv"
-temp_dir <- tempdir()
-temp_file <- tempfile()
-download.file(url, temp_file)
-unzip(temp_file, file_name, exdir = temp_dir)
-
-hisco <- read.csv(file.path(temp_dir, file_name), 
-  header = FALSE, sep = ";", encoding = "latin1", stringsAsFactors = FALSE)
-colnames(hisco) <- c("id", "original", "standard", "hisco", "status", 
-  "relation", "product", "hisclass", "hisclass_5", "hiscam_u1", "hiscam_nl", 
-  "socpo", "release")
-hisco$original <- iconv(hisco$original, "latin1", "utf8")
-hisco$standard <- iconv(hisco$standard, "latin1", "utf8")
+hisco <- read.csv("data-raw/hisco-ses.csv.gz")
+colnames(hisco) <- tolower(colnames(hisco))
+hisco <- hisco %>% 
+  mutate(en_hisco_text = str_replace_all(en_hisco_text, "â€™", "'"))
 
 res <- hisco %>% filter(is.na(status), is.na(relation), is.na(product)) %>% 
   count(hisco) %>% 

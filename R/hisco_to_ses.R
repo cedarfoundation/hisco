@@ -6,12 +6,12 @@
 #'
 #' @param x a vector of HISCO codes, a path to a csv file or data.frame that holds HISCO and
 #'   optional STATUS, RELATION and PRODUCT mappigns
-#' @param class ouput class system
+#' @param ses ouput SES system
 #' @param status name of STATUS variable or vector of STATUS codes
 #' @param relation name of RELATION variable or vector of RELATION codes
 #' @param product name of PRODUCT variable or vector of PRODUCT codes
-#' @param output vector or data.frame
-#' @param name name of variable con
+#' @param label logical. TRUE will display label for SES such as "Forman". 
+#'   FALSE will display the SES as a numeric code.
 #' @param reference A data.frame or a path to a csv file containing a reference table. 
 #'   Not yet implemented.
 #' @param messages Print summary statistics on classification result.
@@ -20,65 +20,59 @@
 #' @import dplyr
 #' @import assertthat
 
-hisco_to_ses <- function(x, 
-    class = c("hisclass", "hisclass_5", "socpo", "hiscam_u1", "all"),
+hisco_to_ses <- function(x,
+    ses = c("hisclass", "hisclass_5", "socpo", "hiscam_u1", "all"),
     status = NULL,
     relation = NULL,
     product = NULL,
-    output = c("vector", "labled", "full"),
-    name = "hisco",
+    label = FALSE, 
     reference = NULL,
     messages = FALSE) {
   
-  if (!is.null(reference)) 
-    reference <- validate_ref(reference)
+  clss <- c("integer", "numeric")
+  if (!inherits(x, clss))
+    stop(paste("No method for:", paste(class(x), collapse = ", ")))
+  format <- class(x)[min(match(clss, class(x)), na.rm = TRUE)]
+  out_ses <- match.arg(ses)
 
-  out_class <- match.arg(class)
-  output_format <- match.arg(output)
-  if (out_class == "hiscam_u1" & output_format == "labled")
-    output_format <- "vector"
-  
-  in_class <- class(x)
-  
-  dat <- switch(in_class, 
-    "data.frame" = hisco_in.data_frame(x, name, status, relation, product),
-    "character" = hisco_in.character(x, name, status, relation, product),
-    "integer" = hisco_in.integer(x, status, relation, product),
-    "numeric" = hisco_in.numeric(x, status, relation, product)
+  codes = do.call(
+    paste('tohisco', format, sep = '_'),
+    list(x = x, status = status, relation = relation, 
+      product = product)
   )
+  codes
 
+  filtered <- filter_hisco(codes, reference)
+  res <- left_join(codes, filtered$hisco, by = filtered$join_by) 
+  if (messages) print_message(res)
 
-  filtered <- filter_hisco(dat, reference)
-  
-  res <- left_join(dat, filtered$hisco, by = filtered$join_by) 
-  if (messages) {
-    message("\n\nHISCLASS matches:")
-    print(knitr::kable(res %>% count(hisclass_label) %>% mutate( prop = round(n/sum(n),2)),caption=))
-    message("\n\nHISCLASS 5 matches:")
-    print(knitr::kable(res %>% count(hisclass_5_label) %>% mutate( prop = round(n/sum(n),2))))
-    message("\n\nSOCPO matches:")
-    print(knitr::kable(res %>% count(socpo_label) %>% mutate( prop = round(n/sum(n),2))))
-    message("\n\nHISCAM_U1 matches:")
-    print(knitr::kable(
-      res %>% mutate(match = factor(!is.na(hiscam_u1))) %>% count(match) %>% mutate( prop = round(n/sum(n),2))
-      ))
-
+  # output
+  if (label){
+    lbl = paste0(out_ses, "_label")
+    res <- res %>% select_("hisco", lbl)
+  } else {
+    res <- res %>% select_("hisco", out_ses)
   }
-  if (out_class == "all")
-    return(res)
-  
-  if (output_format == "labled"){
-    lbl = paste0(out_class, "_label")
-    res <- res %>% select_("hisco", out_class, lbl)
-  } else if (output_format == "vector"){  
-    res <- res %>% select_("hisco", out_class)
-  }
-  return(switch(output_format, 
-    "vector" = res[ ,2],
-    "labled" = res[ ,c(2:3)],
-    "full" = res
-  ))
+  res[ ,2]
 }
+
+#' Print message
+
+print_message <- function(res){
+  
+  message("\n\nHISCLASS matches:")
+  print(knitr::kable(res %>% count(hisclass_label) %>% mutate( prop = round(n/sum(n),2)),caption=))
+  message("\n\nHISCLASS 5 matches:")
+  print(knitr::kable(res %>% count(hisclass_5_label) %>% mutate( prop = round(n/sum(n),2))))
+  message("\n\nSOCPO matches:")
+  print(knitr::kable(res %>% count(socpo_label) %>% mutate( prop = round(n/sum(n),2))))
+  message("\n\nHISCAM_U1 matches:")
+  print(knitr::kable(
+    res %>% mutate(match = factor(!is.na(hiscam_u1))) %>% count(match) %>% mutate( prop = round(n/sum(n),2))
+    ))
+  message("\n")
+}
+
 
 filter_hisco <- function(x, ref) {
   env <- environment()
@@ -111,7 +105,7 @@ filter_hisco <- function(x, ref) {
   return(list(hisco = hisco, join_by = join_by))
 }
 
-hisco_in.data_frame <- function(x, name = NULL, status = NULL, relation = NULL, product = NULL){
+tohisco_data_frame <- function(x, name = NULL, status = NULL, relation = NULL, product = NULL){
   
   assert_that(name %in% colnames(x))
   res <- data.frame(hisco = x[ ,name])
@@ -126,15 +120,15 @@ hisco_in.data_frame <- function(x, name = NULL, status = NULL, relation = NULL, 
   return(res)
 }
 
-hisco_in.character <- function(x, ...){
+tohisco_character <- function(x, ...){
   # read data from csv and use data.frame
   assert_that(file.exists(x), msg = sprintf("Cannot open file '%s'", x))
   raw <- read.csv(x)
   colnames(raw) <- tolower(colnames(raw))
-  return(hisco_in.data_frame(raw, ...))
+  return(tohisco_data_frame(raw, ...))
 }
 
-hisco_in.integer <- function(x, status_codes = NULL, relation_codes = NULL, product_codes = NULL){
+tohisco_integer <- function(x, status_codes = NULL, relation_codes = NULL, product_codes = NULL){
   
   y <- data.frame(hisco = x)
 
@@ -148,7 +142,7 @@ hisco_in.integer <- function(x, status_codes = NULL, relation_codes = NULL, prod
   return(y)
 }
 
-hisco_in.numeric <- function(x, ...){
+tohisco_numeric <- function(x, ...){
   x <- as.integer(x)
-  return(hisco_in.integer(x, ...))
+  return(tohisco_integer(x, ...))
 }

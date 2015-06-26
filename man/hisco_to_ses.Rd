@@ -4,16 +4,15 @@
 \alias{hisco_to_ses}
 \title{Hisco to SES classification}
 \usage{
-hisco_to_ses(x, class = c("hisclass", "hisclass_5", "socpo", "hiscam_u1",
-  "all"), status = NULL, relation = NULL, product = NULL,
-  output = c("vector", "labled", "full"), name = "hisco",
+hisco_to_ses(x, ses = c("hisclass", "hisclass_5", "socpo", "hiscam_u1",
+  "all"), status = NULL, relation = NULL, product = NULL, label = FALSE,
   reference = NULL, messages = FALSE)
 }
 \arguments{
 \item{x}{a vector of HISCO codes, a path to a csv file or data.frame that holds HISCO and
 optional STATUS, RELATION and PRODUCT mappigns}
 
-\item{class}{ouput class system}
+\item{ses}{ouput SES system}
 
 \item{status}{name of STATUS variable or vector of STATUS codes}
 
@@ -21,9 +20,8 @@ optional STATUS, RELATION and PRODUCT mappigns}
 
 \item{product}{name of PRODUCT variable or vector of PRODUCT codes}
 
-\item{output}{vector or data.frame}
-
-\item{name}{name of variable con}
+\item{label}{logical. TRUE will display label for SES such as "Forman".
+FALSE will display the SES as a numeric code.}
 
 \item{reference}{A data.frame or a path to a csv file containing a reference table.
 Not yet implemented.}

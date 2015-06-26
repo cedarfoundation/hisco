@@ -30,7 +30,7 @@ hisco_to_ses(hisco_codes, "socpo", status = rep(33, length(hisco_codes)))
 Classification to label HISCLASS.
 
 ```{r}
-hisco_to_ses(hisco_codes, "hisclass", output = "labled")
+hisco_to_ses(hisco_codes, "hisclass", label = TRUE)
 ```
 
 With summary statistics.
