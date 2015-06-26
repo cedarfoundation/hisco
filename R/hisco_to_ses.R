@@ -25,7 +25,7 @@ hisco_to_ses <- function(x,
     status = NULL,
     relation = NULL,
     product = NULL,
-    output = c("vector", "labled", "full"),
+    output = c(NULL, "vector", "labled", "full"),
     name = "hisco",
     reference = NULL,
     messages = FALSE) {
@@ -33,12 +33,23 @@ hisco_to_ses <- function(x,
   if (!is.null(reference)) 
     reference <- validate_ref(reference)
 
+  in_class <- class(x)
   out_class <- match.arg(class)
-  output_format <- match.arg(output)
+
+  if (!is.null(output)){
+    output_format <- match.arg(output)
+  } else {
+    ouput_fomat = switch(in_class,
+      "data.frame" = "full",
+      "character" = "full",
+      "integer" = "vector",
+      "numeric" = "vector"
+    )
+  }
+
   if (out_class == "hiscam_u1" & output_format == "labled")
     output_format <- "vector"
   
-  in_class <- class(x)
   
   dat <- switch(in_class, 
     "data.frame" = hisco_in.data_frame(x, name, status, relation, product),
@@ -47,13 +58,13 @@ hisco_to_ses <- function(x,
     "numeric" = hisco_in.numeric(x, status, relation, product)
   )
 
-
   filtered <- filter_hisco(dat, reference)
   
   res <- left_join(dat, filtered$hisco, by = filtered$join_by) 
+
   if (messages) {
     message("\n\nHISCLASS matches:")
-    print(knitr::kable(res %>% count(hisclass_label) %>% mutate( prop = round(n/sum(n),2)),caption=))
+    print(knitr::kable(res %>% count(hisclass_label) %>% mutate( prop = round(n/sum(n),2))))
     message("\n\nHISCLASS 5 matches:")
     print(knitr::kable(res %>% count(hisclass_5_label) %>% mutate( prop = round(n/sum(n),2))))
     message("\n\nSOCPO matches:")

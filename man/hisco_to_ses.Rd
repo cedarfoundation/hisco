@@ -6,7 +6,7 @@
 \usage{
 hisco_to_ses(x, class = c("hisclass", "hisclass_5", "socpo", "hiscam_u1",
   "all"), status = NULL, relation = NULL, product = NULL,
-  output = c("vector", "labled", "full"), name = "hisco",
+  output = c(NULL, "vector", "labled", "full"), name = "hisco",
   reference = NULL, messages = FALSE)
 }
 \arguments{
