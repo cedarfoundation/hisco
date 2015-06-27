@@ -1,3 +1,4 @@
 inst/doc
 tests/docker_test/hisco*.tar.gz
 data-raw/HSN_HISCO_release_2013_01.csv
+hisco.sublime*
