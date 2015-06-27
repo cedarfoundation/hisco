@@ -16,6 +16,8 @@ LazyData: true
 Imports: dplyr,
     assertthat
 Suggests: testthat,
+    plyr,
+    stringr,
     rmarkdown,
     knitr
 VignetteBuilder: knitr
