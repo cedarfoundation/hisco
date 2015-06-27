@@ -14,8 +14,7 @@
 #'   FALSE will display the SES as a numeric code.
 #' @param name character. Used when input is a data.frame to specify the
 #'   name of the column containing hisco codes.
-#' @param reference A data.frame or a path to a csv file containing a reference table. 
-#'   Not yet implemented.
+#' @param reference character. Path to a csv file containing a reference table.
 #' @param messages Print summary statistics on classification result.
 #' @author Johan Junkka \email{johan.junkka@@gmail.com}
 #' @export
@@ -102,7 +101,7 @@ filter_hisco <- function(x, ref) {
   env <- environment()
 
   if (!is.null(ref)){
-    hisco <- ref
+    hisco <- validate_ref(ref)
   } else{
     data(hisco, package = "hisco", envir = env)
   }

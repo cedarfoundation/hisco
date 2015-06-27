@@ -22,6 +22,8 @@ write_reference <- function(path) {
 }
 
 validate_ref <- function(x) {
+  if (x == "hisco_hsn")
+    return(hisco_hsn)
   # check if file exists
   assert_that(file.exists(x), msg = sprintf('Cannot open %s', x))
 
