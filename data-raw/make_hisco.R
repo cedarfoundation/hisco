@@ -4,12 +4,15 @@ library(dplyr)
 
 hisco <- read.csv("data-raw/hisco-ses.csv.gz")
 colnames(hisco) <- tolower(colnames(hisco))
+
 hisco <- hisco %>% 
   mutate(
-    en_hisco_text = str_replace_all(en_hisco_text, "â€™", "'")
+    en_hisco_text = str_replace_all(en_hisco_text, "\\(Caf\\\303\\\203\\\302\\\251", " "),
+    en_hisco_text = str_replace_all(en_hisco_text, "\\\303\\\203\\\302\\\250", " "),
+    en_hisco_text = str_replace_all(en_hisco_text, "\\\303\\\242\\\342\\\202\\\254\\\342\\\204\\\242", "'")
   )
 
-res <- hisco_hsn %>% group_by(hisco, status, relation, product) %>% 
+res <- hisco %>% group_by(hisco, status, relation, product) %>% 
   tally() %>% 
   filter(n > 1)
 

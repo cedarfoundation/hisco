@@ -4,7 +4,7 @@
 \name{hisco}
 \alias{hisco}
 \title{Hisco codes}
-\format{A data frame with 4123 rows and 9 variables:
+\format{A data frame with 4123 rows and 12 variables:
 \describe{
   \item{hisco}{HISCO basic code}
   \item{en_hisco_text}{Plain text description of occupation}

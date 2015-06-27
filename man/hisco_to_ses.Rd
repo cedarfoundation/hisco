@@ -6,7 +6,7 @@
 \usage{
 hisco_to_ses(x, ses = c("hisclass", "hisclass_5", "socpo", "hiscam_u1",
   "all"), status = NULL, relation = NULL, product = NULL, label = FALSE,
-  reference = NULL, messages = FALSE)
+  name = "hisco", reference = NULL, messages = FALSE)
 }
 \arguments{
 \item{x}{a vector of HISCO codes, a path to a csv file or data.frame that holds HISCO and
@@ -22,6 +22,9 @@ optional STATUS, RELATION and PRODUCT mappigns}
 
 \item{label}{logical. TRUE will display label for SES such as "Forman".
 FALSE will display the SES as a numeric code.}
+
+\item{name}{character. Used when input is a data.frame to specify the
+name of the column containing hisco codes.}
 
 \item{reference}{A data.frame or a path to a csv file containing a reference table.
 Not yet implemented.}

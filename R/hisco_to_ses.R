@@ -12,6 +12,8 @@
 #' @param product name of PRODUCT variable or vector of PRODUCT codes
 #' @param label logical. TRUE will display label for SES such as "Forman". 
 #'   FALSE will display the SES as a numeric code.
+#' @param name character. Used when input is a data.frame to specify the
+#'   name of the column containing hisco codes.
 #' @param reference A data.frame or a path to a csv file containing a reference table. 
 #'   Not yet implemented.
 #' @param messages Print summary statistics on classification result.
@@ -26,34 +28,56 @@ hisco_to_ses <- function(x,
     relation = NULL,
     product = NULL,
     label = FALSE, 
+    name = 'hisco',
     reference = NULL,
     messages = FALSE) {
   
-  clss <- c("integer", "numeric")
+  clss <- c("integer", "numeric", "data.frame")
   if (!inherits(x, clss))
     stop(paste("No method for:", paste(class(x), collapse = ", ")))
   format <- class(x)[min(match(clss, class(x)), na.rm = TRUE)]
   out_ses <- match.arg(ses)
 
-  codes = do.call(
+  codes <- do.call(
     paste('tohisco', format, sep = '_'),
     list(x = x, status = status, relation = relation, 
-      product = product)
+      product = product, name = name)
   )
-  codes
 
   filtered <- filter_hisco(codes, reference)
   res <- left_join(codes, filtered$hisco, by = filtered$join_by) 
   if (messages) print_message(res)
 
   # output
+  simp_res <- hiscoout_simple(res, label, out_ses)
+
+  result <- do.call(
+    paste('hiscoout', format, sep = '_'),
+    list(x = x, res = simp_res)
+  )
+  result
+}
+
+hiscoout_simple <- function(res, label, out_ses){
   if (label){
     lbl = paste0(out_ses, "_label")
     res <- res %>% select_("hisco", lbl)
   } else {
     res <- res %>% select_("hisco", out_ses)
   }
+  res
+}
+
+hiscoout_integer <- function(x, res){
   res[ ,2]
+}
+
+hiscoout_numeric <- function(x, res){
+  res[ ,2]
+}
+
+hiscoout_data.frame <- function(x, res){
+  cbind(x, select(res, 2))
 }
 
 # Print message
@@ -105,7 +129,7 @@ filter_hisco <- function(x, ref) {
   return(list(hisco = hisco, join_by = join_by))
 }
 
-tohisco_data_frame <- function(x, name = NULL, status = NULL, relation = NULL, product = NULL){
+tohisco_data.frame <- function(x, status = NULL, relation = NULL, product = NULL, name = "hisco"){
   
   assert_that(name %in% colnames(x))
   res <- data.frame(hisco = x[ ,name])
@@ -125,10 +149,10 @@ tohisco_character <- function(x, ...){
   assert_that(file.exists(x), msg = sprintf("Cannot open file '%s'", x))
   raw <- read.csv(x)
   colnames(raw) <- tolower(colnames(raw))
-  return(tohisco_data_frame(raw, ...))
+  return(tohisco_data.frame(raw, ...))
 }
 
-tohisco_integer <- function(x, status_codes = NULL, relation_codes = NULL, product_codes = NULL){
+tohisco_integer <- function(x, status_codes = NULL, relation_codes = NULL, product_codes = NULL, ...){
   
   y <- data.frame(hisco = x)
 
