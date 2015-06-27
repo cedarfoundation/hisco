@@ -30,8 +30,6 @@ assert_that(nrow(hisco) == nrow(hisco2))
 
 hisco <- hisco2
 
-save(hisco, file = "data/hisco.rda")
-
 hisclass_5 <- read.csv("data-raw/hisclass_5.csv")
 colnames(hisclass_5) <- tolower(colnames(hisclass_5))
 
@@ -43,9 +41,6 @@ hisco2 <- hisclass_5 %>% select(hisclass_5, hisclass_5_label) %>%
 assert_that(nrow(hisco) == nrow(hisco2))
 
 hisco <- hisco2
-
-save(hisco, file = "data/hisco.rda")
-
 
 socpo <- read.csv("data-raw/socpo.csv", encoding = "utf8")
 colnames(socpo) <- tolower(colnames(socpo))

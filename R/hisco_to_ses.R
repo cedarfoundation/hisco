@@ -50,6 +50,8 @@ hisco_to_ses <- function(x,
   # output
   simp_res <- hiscoout_simple(res, label, out_ses)
 
+
+
   result <- do.call(
     paste('hiscoout', format, sep = '_'),
     list(x = x, res = simp_res)

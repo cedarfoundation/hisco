@@ -26,8 +26,7 @@ FALSE will display the SES as a numeric code.}
 \item{name}{character. Used when input is a data.frame to specify the
 name of the column containing hisco codes.}
 
-\item{reference}{A data.frame or a path to a csv file containing a reference table.
-Not yet implemented.}
+\item{reference}{character. Path to a csv file containing a reference table.}
 
 \item{messages}{Print summary statistics on classification result.}
 }
