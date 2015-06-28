@@ -17,6 +17,7 @@ To manually update the hisco classifications you can
 }
 \examples{
 write_reference("my_hisco.csv")
+unlink("my_hisco.csv")
 }
 \author{
 Johan Junkka \email{johan.junkka@gmail.com}

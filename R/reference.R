@@ -12,6 +12,7 @@
 #' @export
 #' @examples
 #' write_reference("my_hisco.csv")
+#' unlink("my_hisco.csv")
 #' 
 
 write_reference <- function(path) { 

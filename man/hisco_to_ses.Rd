@@ -35,6 +35,12 @@ Function to classify historical occupations coded in HICSO
   (Historical International Standard Classification of Occupations)
   to HISCLASS 12, HISCLASS 5, SOCPO or HISCAM social class systems.
 }
+\examples{
+hisco_codes <- c(22670, 22675, 22680, 22690, 30000, 31000, 31020,
+                 31030, 31040)
+hisco_to_ses(hisco_codes)
+hisco_to_ses(hisco_codes, ses = "socpo", label = TRUE)
+}
 \author{
 Johan Junkka \email{johan.junkka@gmail.com}
 }

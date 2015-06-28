@@ -20,6 +20,13 @@
 #' @export
 #' @import dplyr
 #' @import assertthat
+#' @examples
+#' hisco_codes <- c(22670, 22675, 22680, 22690, 30000, 31000, 31020, 
+#'                  31030, 31040)
+#' hisco_to_ses(hisco_codes)
+#' hisco_to_ses(hisco_codes, ses = "socpo", label = TRUE)
+#'
+
 
 hisco_to_ses <- function(x,
     ses = c("hisclass", "hisclass_5", "socpo", "hiscam_u1", "all"),
